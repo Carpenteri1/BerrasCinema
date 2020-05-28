@@ -4,56 +4,45 @@
     ViewData["Title"] = "Order Tickets";
 }
 
-    <p>
-        <div class="form-group">
-            <a class="btn btn-primary" asp-action="Create">@ViewData["Title"]</a>
-        </div>
-    </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.amountOfTrickets)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerFirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerLastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CustomerConfirmEmail)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.amountOfTrickets)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerFirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerLastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerEmail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerConfirmEmail)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BookingID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BookingID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BookingID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+<div>
+    <h1>Order Confirmed</h1>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            <p>OrderID:</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.LastOrDefault().BookingID
+        </dd>
+        <dt class="col-sm-2">
+            <p>Ticket's:</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.LastOrDefault().amountOfTrickets
+        </dd>
+        <dt class="col-sm-2">
+            <p>First Name:</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.LastOrDefault().CustomerFirstName
+        </dd>
+        <dt class="col-sm-2">
+            <p>Last Name:</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.LastOrDefault().CustomerLastName
+        </dd>
+        <dt class="col-sm-2">
+            <p>Email:</p>
+        </dt>
+        <dd class="col-sm-10">
+            @Model.LastOrDefault().CustomerEmail
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.LastOrDefault().BookingID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
