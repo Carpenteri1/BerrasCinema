@@ -11,5 +11,9 @@ namespace BerrasCinema.Models
         [Key]
         public int MovieID { get; set; }
         public string MovieName { get; set; }
+
+        public DateTime MovieDuration { get; set; }
+
+        public DateTime MovieStart { get; set; }
     }
 }

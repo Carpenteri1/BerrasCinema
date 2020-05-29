@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using BerrasCinema.Models;
 
@@ -9,27 +10,25 @@ namespace BerrasCinema
     public class InMemoryMovieList
     {
         private const int MaxAmmountOfMovies = 18;
-        private static int amountOfMovies;
-        public static List<Movies> MovieList { get; set; }
 
-        public static void InitializeAsync(CinemaDBContext context)
+        public static void Initialize(CinemaDBContext context)
         {
             if (!context.Movie.Count().Equals(MaxAmmountOfMovies))
-            {
-                //database already have content just return
-                var task = CraftDataAsync(context);//fix delegates make it run on another thread
-                task.Wait(AddToDatabase(context));
-
-                if (!context.Movie.Count().Equals(MaxAmmountOfMovies))
                 {
-                    InitializeAsync(context);
-                } 
-            }         
+                //database already have content just return
+                    List<Movies> listOfMovies = CreateMovieList();
+
+                    if (!AddToDatabase(context,listOfMovies).Count().Equals(MaxAmmountOfMovies))
+                    {
+                        Initialize(context);
+                    }
+                }
+              
         }
 
-        private static List<Movies> CreateMovieList(CinemaDBContext context)
+        public static List<Movies> CreateMovieList()
         {
-            MovieList = new List<Movies>
+           List<Movies> createdList = new List<Movies>
             {
             new Movies{MovieName = "Blade Runner"},
             new Movies{MovieName = "Showdown in Little Tokyo" },
@@ -63,25 +62,19 @@ namespace BerrasCinema
             new Movies{MovieName = "Karate Kid"},
             new Movies{MovieName = "Terminator" },
         };
-            return MovieList;
+            return createdList;
         
     }
 
-        private static int AddToDatabase(CinemaDBContext context) 
+        private static List<Movies> AddToDatabase(CinemaDBContext context,List<Movies>listOfMovies) 
         {
-            foreach(var s in MovieList) 
+            foreach(var s in listOfMovies) 
             {
                 context.Movie.Add(s);
             }
             context.SaveChanges();
 
-            return context.Movie.Count();
+            return listOfMovies;
         }
-
-        private async static Task CraftDataAsync(CinemaDBContext context) 
-        {
-            List<Movies> listOfMovies = await Task.Run(() => CreateMovieList(context));
-        }
-         
     }
 }
