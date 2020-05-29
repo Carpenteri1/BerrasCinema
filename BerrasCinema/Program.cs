@@ -23,7 +23,7 @@ namespace BerrasCinema
                 try
                 {
                     var context = services.GetRequiredService<CinemaDBContext>();
-                    InMemoryMovieList.Initialize(context);
+                    InMemoryMovieList.InitializeAsync(context);
                 }
                 catch (Exception ex)
                 {
