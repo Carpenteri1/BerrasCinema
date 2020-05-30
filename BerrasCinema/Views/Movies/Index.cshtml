@@ -1,20 +1,45 @@
 ﻿@model IEnumerable<BerrasCinema.Models.Movies>
 
 @{
-    ViewData["Title"] = "Available Movies";
+    ViewData["Title"] = "Index";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 <table class="table">
-    
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieDuration)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(itemModel => item.MovieName)
+                @Html.DisplayFor(modelItem => item.MovieName)
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.MovieID">Details</a>
+                @Html.DisplayFor(modelItem => item.MovieStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieDuration)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.MovieID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MovieID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MovieID">Delete</a>
             </td>
         </tr>
 }

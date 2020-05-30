@@ -8,12 +8,15 @@ namespace BerrasCinema.Models
 {
     public class Movies
     {
+
         [Key]
         public int MovieID { get; set; }
         public string MovieName { get; set; }
-
+        
+        [DataType(DataType.DateTime)]
+        public DateTime MovieStart { get; set; }
+        [DataType(DataType.Time)]
         public DateTime MovieDuration { get; set; }
 
-        public DateTime MovieStart { get; set; }
     }
 }

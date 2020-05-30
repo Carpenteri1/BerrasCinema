@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BerrasCinema;
 using BerrasCinema.Models;
-using System.Collections;
 
 namespace BerrasCinema.Controllers
 {
@@ -55,7 +54,7 @@ namespace BerrasCinema.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MovieID,MovieName")] Movies movies)
+        public async Task<IActionResult> Create([Bind("MovieID,MovieName,MovieStart,MovieDuration")] Movies movies)
         {
             if (ModelState.IsValid)
             {
@@ -87,7 +86,7 @@ namespace BerrasCinema.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MovieID,MovieName")] Movies movies)
+        public async Task<IActionResult> Edit(int id, [Bind("MovieID,MovieName,MovieStart,MovieDuration")] Movies movies)
         {
             if (id != movies.MovieID)
             {
