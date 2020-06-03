@@ -56,7 +56,7 @@ namespace BerrasCinema
           
             foreach (var s in listOfMovies)
             {
-                if(s.MovieName.Equals("Invasion USA"))
+                if (s.MovieName.Equals("Invasion USA"))
                 {
                     s.SeatsLeft = NoSeatsLeft;
                 }
@@ -64,7 +64,7 @@ namespace BerrasCinema
                 {
                     s.SeatsLeft = NoSeatsLeft;
                 }
-                else if (s.MovieName.Equals("Rambo"))
+                else if (s.MovieName.Equals("Terminator"))
                 {
                     s.SeatsLeft = NoSeatsLeft;
                 }
