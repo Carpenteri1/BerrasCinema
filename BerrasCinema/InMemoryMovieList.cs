@@ -13,6 +13,7 @@ namespace BerrasCinema
         private const int NoSeatsLeft = 0;
         private const int AmmountOfSeat = 50;
         private static double queuTime = 30;
+        private static string[] MovieNames = new string[] { "Invasion USA", "Commando", "Rambo" };
         private static List<Movies> listOfMovies { get; set; }
 
         public static List<Movies> Initialize(CinemaDBContext context)
@@ -56,15 +57,9 @@ namespace BerrasCinema
           
             foreach (var s in listOfMovies)
             {
-                if (s.MovieName.Equals("Invasion USA"))
-                {
-                    s.SeatsLeft = NoSeatsLeft;
-                }
-                else if (s.MovieName.Equals("Commando"))
-                {
-                    s.SeatsLeft = NoSeatsLeft;
-                }
-                else if (s.MovieName.Equals("Terminator"))
+                if (s.MovieName.Equals(MovieNames[0]) ||
+                    s.MovieName.Equals(MovieNames[1]) ||
+                    s.MovieName.Equals(MovieNames[2]))
                 {
                     s.SeatsLeft = NoSeatsLeft;
                 }
