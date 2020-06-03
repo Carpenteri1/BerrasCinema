@@ -6,6 +6,5 @@ There should be a list of movies, you can order tickets for a movie, see what ti
 # How to install
 Click the .sql file called CreateDatabase to create your database.
 Server name is (localdb)\MSSQLLocalDB. 
-Open the project in visual studio, just run the project and everything should be working.
-If the movie list wont appear, go to package manager console and use the command Update-Database .
-Run the project once again.
+Open the project in visual studio, go to package manager console and use the command Update-Database .
+Run the projec.
