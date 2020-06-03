@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BerrasCinema.Migrations
 {
     [DbContext(typeof(CinemaDBContext))]
-    [Migration("20200530105433_Initilize")]
-    partial class Initilize
+    [Migration("20200602153330_Initlize")]
+    partial class Initlize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,14 +28,17 @@ namespace BerrasCinema.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("MovieDuration")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("MovieDuration")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("MovieName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("MovieStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("SeatsLeft")
+                        .HasColumnType("int");
 
                     b.HasKey("MovieID");
 
@@ -44,31 +47,33 @@ namespace BerrasCinema.Migrations
 
             modelBuilder.Entity("BerrasCinema.Models.Order", b =>
                 {
-                    b.Property<int>("BookingID")
+                    b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CustomerConfirmEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerFirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerLastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("amountOfTrickets")
+                    b.Property<int>("AmmountOfTickets")
                         .HasColumnType("int");
 
-                    b.HasKey("BookingID");
+                    b.Property<string>("ConfirmEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MovieID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MovieName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderID");
 
                     b.ToTable("TicketOrders");
                 });

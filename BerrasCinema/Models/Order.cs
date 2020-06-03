@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,27 +11,15 @@ namespace BerrasCinema.Models
     public class Order
     {
         [Key]
-        public int BookingID { get; set; }
+        public int OrderID { get; set; }
+        public DateTime OrderDate { get { return DateTime.Now; } }
 
-        [Required(ErrorMessage = "Required!")]
-        [Range(1, 2, ErrorMessage = "Can only order 1 or 2 tickets")]
-        public int amountOfTrickets { get; set; }
-
-        [Required(ErrorMessage = "Required!")]
-        [DisplayName("First Name")]
-        public string CustomerFirstName { get; set; }
-        [Required(ErrorMessage = "Required!")]
-        [DisplayName("Last Name")]
-        public string CustomerLastName { get; set; }
-        [Required(ErrorMessage = "Required!")]
-        [DataType(DataType.EmailAddress)]
-        [DisplayName("Email")]
-        public string CustomerEmail { get; set; }
-        [Required(ErrorMessage = "Required!")]
-        [DataType(DataType.EmailAddress)]
-        [Compare("CustomerEmail")]
-        [DisplayName("Confirm Email")]
-        public string CustomerConfirmEmail { get; set; }
-
+        public int AmmountOfTickets { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string ConfirmEmail { get; set; }
+        public string MovieName { get; set; }
+        public int MovieID { get; set; }
     }
 }

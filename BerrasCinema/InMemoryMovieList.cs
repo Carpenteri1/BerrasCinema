@@ -10,11 +10,11 @@ namespace BerrasCinema
     public class InMemoryMovieList
     {
         private const int MaxAmmountOfMovies = 12;
+        private static List<Movies> listOfMovies { get; set; }
 
         public static List<Movies> Initialize(CinemaDBContext context)
         {
-            List<Movies> listOfMovies = new List<Movies>();
-            if (!context.Movie.Count().Equals(MaxAmmountOfMovies))
+            if (!(context.Movie.Count() >= MaxAmmountOfMovies))
             {
                 listOfMovies = CreateMovieList();
                 listOfMovies = AddMovieDuration(listOfMovies);
@@ -36,16 +36,15 @@ namespace BerrasCinema
         private static List<Movies> AddQueueTimes(List<Movies> listOfMovies) 
         {
             double queuTime = 30;
-            double durationToMinutes;
+            double durationToMinutes,durationToHours;
             foreach(var s in listOfMovies)
             {
                 s.MovieStart = DateTime.Now.AddMinutes(queuTime);
-                durationToMinutes = s.MovieDuration.Minute;
-                queuTime += durationToMinutes;
+                durationToMinutes = int.Parse(s.MovieDuration.Minute.ToString());
+                durationToHours = int.Parse(s.MovieDuration.Hour.ToString());
+                queuTime += durationToHours * 60 + durationToMinutes;
                 queuTime += 30;
-                
             }
-
             return listOfMovies;
         }
 
@@ -59,7 +58,6 @@ namespace BerrasCinema
                 s.MovieDuration = myDate.AddMinutes(durations[i]);
                 i++;
             }
-
             return listOfMovies;
         }
 
@@ -102,6 +100,23 @@ namespace BerrasCinema
             context.SaveChanges();
 
             return listOfMovies;
+        }
+
+
+        public static IEnumerable<Movies> GetMovies()
+        {
+            return from m in listOfMovies
+                   orderby m.MovieName
+                   select m;
+        }
+
+        public static IEnumerable<Movies> GetMoviesByName(string name)
+        {
+            Movies movie = new Movies();
+            return from m in listOfMovies
+                   where string.IsNullOrEmpty(name) || m.MovieName.StartsWith(name)
+                   orderby m.MovieName
+                   select m;
         }
     }
 }

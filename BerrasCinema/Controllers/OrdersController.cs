@@ -34,7 +34,7 @@ namespace BerrasCinema.Controllers
             }
 
             var order = await _context.TicketOrders
-                .FirstOrDefaultAsync(m => m.BookingID == id);
+                .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {
                 return NotFound();
@@ -46,6 +46,8 @@ namespace BerrasCinema.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
+            ViewBag.MovieList = new SelectList(_context.Movie.ToList(), "MovieID", "MovieName");
+
             return View();
         }
 
@@ -54,13 +56,44 @@ namespace BerrasCinema.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookingID,amountOfTrickets,CustomerFirstName,CustomerLastName,CustomerEmail,CustomerConfirmEmail")] Order order)
+        public async Task<IActionResult> Create(Order order)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                foreach(var s in _context.Movie)
+                {
+                    if (order.MovieName == s.MovieName)
+                    {
+                        order.MovieID = s.MovieID;
+                    }
+
+                }
+
+                if (!order.MovieID.Equals(0))
+                {
+                    Order _order = new Order
+                    {
+                        OrderID = order.OrderID,
+                        AmmountOfTickets = order.AmmountOfTickets,
+                        FirstName = order.FirstName,
+                        LastName = order.LastName,
+                        Email = order.Email,
+                        ConfirmEmail = order.ConfirmEmail,
+                        MovieName = order.MovieName,
+                        MovieID = order.MovieID,
+
+                    };
+
+                    _context.Add(_order);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+         
             }
             return View(order);
         }
@@ -86,9 +119,9 @@ namespace BerrasCinema.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookingID,amountOfTrickets,CustomerFirstName,CustomerLastName,CustomerEmail,CustomerConfirmEmail")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("OrderID,AmmountOfTickets,FirstName,LastName,Email,ConfirmEmail")] Order order)
         {
-            if (id != order.BookingID)
+            if (id != order.OrderID)
             {
                 return NotFound();
             }
@@ -102,7 +135,7 @@ namespace BerrasCinema.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.BookingID))
+                    if (!OrderExists(order.OrderID))
                     {
                         return NotFound();
                     }
@@ -125,7 +158,7 @@ namespace BerrasCinema.Controllers
             }
 
             var order = await _context.TicketOrders
-                .FirstOrDefaultAsync(m => m.BookingID == id);
+                .FirstOrDefaultAsync(m => m.OrderID == id);
             if (order == null)
             {
                 return NotFound();
@@ -147,7 +180,7 @@ namespace BerrasCinema.Controllers
 
         private bool OrderExists(int id)
         {
-            return _context.TicketOrders.Any(e => e.BookingID == id);
+            return _context.TicketOrders.Any(e => e.OrderID == id);
         }
     }
 }

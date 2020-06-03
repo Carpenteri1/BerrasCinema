@@ -13,6 +13,7 @@ namespace BerrasCinema
         {
 
         }
+
         public DbSet<Movies> Movie { get; set; }
         public DbSet<Order> TicketOrders { get; set; }
     }

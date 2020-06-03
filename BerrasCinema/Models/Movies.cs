@@ -12,11 +12,14 @@ namespace BerrasCinema.Models
         [Key]
         public int MovieID { get; set; }
         public string MovieName { get; set; }
-        
+        public int SeatsLeft { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime MovieStart { get; set; }
         [DataType(DataType.Time)]
         public DateTime MovieDuration { get; set; }
 
+
     }
+
 }
