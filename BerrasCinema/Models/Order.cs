@@ -13,7 +13,7 @@ namespace BerrasCinema.Models
         [Key]
         public int OrderID { get; set; }
         public DateTime OrderDate { get { return DateTime.Now; } }
-        [Range(1,2)]
+       
         [Required]
         public int AmmountOfTickets { get; set; }
         [Required]

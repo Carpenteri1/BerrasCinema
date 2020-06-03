@@ -13,6 +13,7 @@ namespace BerrasCinema.Controllers
     public class OrdersController : Controller
     {
         private readonly CinemaDBContext _context;
+        private const int NoSeatsLeft = 0;
 
         public OrdersController(CinemaDBContext context)
         {
@@ -61,10 +62,14 @@ namespace BerrasCinema.Controllers
             {
                 foreach(var s in _context.Movie)
                 {
-                    if (order.MovieName == s.MovieName)
+                    if (order.MovieName == s.MovieName && !s.SeatsLeft.Equals(NoSeatsLeft))
                     {
-                        order.MovieID = s.MovieID;
-                        s.SeatsLeft -= order.AmmountOfTickets;
+                        int tempAmmount = s.SeatsLeft - order.AmmountOfTickets;
+                        if(tempAmmount >= 0)
+                        {
+                            order.MovieID = s.MovieID;
+                            s.SeatsLeft -= order.AmmountOfTickets;
+                        }
                     }
                 }
 
