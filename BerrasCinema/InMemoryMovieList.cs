@@ -10,6 +10,9 @@ namespace BerrasCinema
     public class InMemoryMovieList
     {
         private const int MaxAmmountOfMovies = 12;
+        private const int NoSeatsLeft = 0;
+        private const int AmmountOfSeat = 50;
+        private static double queuTime = 30;
         private static List<Movies> listOfMovies { get; set; }
 
         public static List<Movies> Initialize(CinemaDBContext context)
@@ -36,7 +39,6 @@ namespace BerrasCinema
 
         private static List<Movies> AddQueueTimes(List<Movies> listOfMovies) 
         {
-            double queuTime = 30;
             double durationToMinutes,durationToHours;
             foreach(var s in listOfMovies)
             {
@@ -51,10 +53,25 @@ namespace BerrasCinema
 
         private static List<Movies> AddAmountsOfSeats(List<Movies> listOfMovies)
         {
-            int ammountOfSeat = 50;
+          
             foreach (var s in listOfMovies)
             {
-                s.SeatsLeft = ammountOfSeat;
+                if(s.MovieName.Equals("Invasion USA"))
+                {
+                    s.SeatsLeft = NoSeatsLeft;
+                }
+                else if (s.MovieName.Equals("Commando"))
+                {
+                    s.SeatsLeft = NoSeatsLeft;
+                }
+                else if (s.MovieName.Equals("Rambo"))
+                {
+                    s.SeatsLeft = NoSeatsLeft;
+                }
+                else
+                {
+                    s.SeatsLeft = AmmountOfSeat;
+                }
             }
             return listOfMovies;
         }
