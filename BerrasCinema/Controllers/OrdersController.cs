@@ -20,11 +20,11 @@ namespace BerrasCinema.Controllers
             _context = context;
         }
 
-        // GET: Orders
-        public async Task<IActionResult> Index()
+        public IActionResult Error()
         {
-            return View(await _context.TicketOrders.ToListAsync());
+            return View();
         }
+
 
         // GET: Orders/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -45,8 +45,9 @@ namespace BerrasCinema.Controllers
         }
 
         // GET: Orders/Create
-        public IActionResult Create()
+        public IActionResult Index()
         {
+            ViewBag.SeatsLeft = new SelectList(_context.Movie.ToList(), "SeatsLeft", "SeatsLeft");
             ViewBag.MovieList = new SelectList(_context.Movie.ToList(), "MovieName", "MovieName");
             return View();
         }
@@ -93,96 +94,12 @@ namespace BerrasCinema.Controllers
                 }
                 else
                 {
-                    return RedirectToAction(nameof(Details));
+                    return RedirectToAction(nameof(Error));
                 }
          
             }
             return View(order);
         }
 
-        // GET: Orders/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.TicketOrders.FindAsync(id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-            return View(order);
-        }
-
-        // POST: Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderID,AmmountOfTickets,FirstName,LastName,Email,ConfirmEmail")] Order order)
-        {
-            if (id != order.OrderID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.OrderID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
-
-        // GET: Orders/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.TicketOrders
-                .FirstOrDefaultAsync(m => m.OrderID == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-
-            return View(order);
-        }
-
-        // POST: Orders/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var order = await _context.TicketOrders.FindAsync(id);
-            _context.TicketOrders.Remove(order);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool OrderExists(int id)
-        {
-            return _context.TicketOrders.Any(e => e.OrderID == id);
-        }
     }
 }

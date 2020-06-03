@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<BerrasCinema.Models.Movies>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Available Movies";
+    
 }
 
-<h1>Index</h1>
+
+<h1>@ViewData["Title"]</h1>
 <table class="table">
     <thead>
         <tr>
@@ -24,24 +26,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovieName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SeatsLeft)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovieStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MovieDuration)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.MovieID">Details</a> 
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+
+            @if (item.SeatsLeft.Equals(0))
+            {
+                <tr style="color:red">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieName)
+                    </td>
+                    <td class="Seats">
+                        @Html.DisplayFor(modelItem => item.SeatsLeft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieStart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieDuration)
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr style="color:black">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieName)
+                    </td>
+                    <td class="Seats">
+                        @Html.DisplayFor(modelItem => item.SeatsLeft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieStart)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MovieDuration)
+                    </td>
+                </tr>
+            }
+
+        }
     </tbody>
 </table>

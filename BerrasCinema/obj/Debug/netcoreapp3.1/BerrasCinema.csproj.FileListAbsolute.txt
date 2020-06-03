@@ -158,10 +158,9 @@ C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\bin\Debug\netcoreapp3.1\t
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\BerrasCinema.csprojAssemblyReference.cache
-C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Movies\Details.cshtml.g.cs
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Movies\Index.cshtml.g.cs
-C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Create.cshtml.g.cs
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Details.cshtml.g.cs
-C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Index.cshtml.g.cs
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\BerrasCinema.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Index.cshtml.g.cs
+C:\Users\Admin\source\AspNet\BerrasCinema\BerrasCinema\obj\Debug\netcoreapp3.1\Razor\Views\Orders\Error.cshtml.g.cs
