@@ -54,12 +54,12 @@ namespace BerrasCinema
 
         private static List<Movies> AddAmountsOfSeats(List<Movies> listOfMovies)
         {
-          
+            int i = 1;
             foreach (var s in listOfMovies)
             {
-                if (s.MovieName.Equals(MovieNames[0]) ||
-                    s.MovieName.Equals(MovieNames[1]) ||
-                    s.MovieName.Equals(MovieNames[2]))
+                if (i.Equals(1) ||
+                    i.Equals(3) ||
+                    i.Equals(7))
                 {
                     s.SeatsLeft = NoSeatsLeft;
                 }
@@ -67,6 +67,7 @@ namespace BerrasCinema
                 {
                     s.SeatsLeft = AmmountOfSeat;
                 }
+                i++;
             }
             return listOfMovies;
         }
