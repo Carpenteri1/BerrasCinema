@@ -6,5 +6,8 @@ There should be a list of movies, you can order tickets for a movie, see what ti
 # How to install
 Click the .sql file called CreateDatabase to create your database.
 Server name is (localdb)\MSSQLLocalDB. 
-Open the project in visual studio, go to package manager console and use the command Update-Database .
-Run the project.
+Open the project in visual studio, go to package manager console and use the command Update-Database.
+Run the project. 
+
+The class InMemoryMovieList.cs will generate the test data in Database.
+
