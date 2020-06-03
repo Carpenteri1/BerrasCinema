@@ -19,6 +19,7 @@ namespace BerrasCinema.Models
         [DataType(DataType.Time)]
         public DateTime MovieDuration { get; set; }
 
+        public ICollection<Order> Orders { get; set; }
 
     }
 

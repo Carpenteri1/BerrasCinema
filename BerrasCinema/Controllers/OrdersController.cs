@@ -46,8 +46,7 @@ namespace BerrasCinema.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            ViewBag.MovieList = new SelectList(_context.Movie.ToList(), "MovieID", "MovieName");
-
+            ViewBag.MovieList = new SelectList(_context.Movie.ToList(), "MovieName", "MovieName");
             return View();
         }
 
@@ -60,14 +59,13 @@ namespace BerrasCinema.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 foreach(var s in _context.Movie)
                 {
                     if (order.MovieName == s.MovieName)
                     {
                         order.MovieID = s.MovieID;
+                        s.SeatsLeft -= order.AmmountOfTickets;
                     }
-
                 }
 
                 if (!order.MovieID.Equals(0))
@@ -82,16 +80,15 @@ namespace BerrasCinema.Controllers
                         ConfirmEmail = order.ConfirmEmail,
                         MovieName = order.MovieName,
                         MovieID = order.MovieID,
-
                     };
 
                     _context.Add(_order);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Details), new {id = _order.OrderID});
                 }
                 else
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Details));
                 }
          
             }

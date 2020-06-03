@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BerrasCinema.Migrations
 {
-    public partial class Initlize : Migration
+    public partial class Initilize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,26 +30,37 @@ namespace BerrasCinema.Migrations
                     OrderID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AmmountOfTickets = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    ConfirmEmail = table.Column<string>(nullable: true),
-                    MovieName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    ConfirmEmail = table.Column<string>(nullable: false),
+                    MovieName = table.Column<string>(nullable: false),
                     MovieID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TicketOrders", x => x.OrderID);
+                    table.ForeignKey(
+                        name: "FK_TicketOrders_Movie_MovieID",
+                        column: x => x.MovieID,
+                        principalTable: "Movie",
+                        principalColumn: "MovieID",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TicketOrders_MovieID",
+                table: "TicketOrders",
+                column: "MovieID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Movie");
+                name: "TicketOrders");
 
             migrationBuilder.DropTable(
-                name: "TicketOrders");
+                name: "Movie");
         }
     }
 }

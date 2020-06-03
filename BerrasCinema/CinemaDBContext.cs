@@ -14,6 +14,14 @@ namespace BerrasCinema
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>()
+                .HasOne<Movies>(s => s.Movies)
+                .WithMany(g => g.Orders)
+                .HasForeignKey(s => s.MovieID);
+        }
+
         public DbSet<Movies> Movie { get; set; }
         public DbSet<Order> TicketOrders { get; set; }
     }

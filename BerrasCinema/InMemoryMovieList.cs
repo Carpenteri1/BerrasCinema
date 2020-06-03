@@ -17,6 +17,7 @@ namespace BerrasCinema
             if (!(context.Movie.Count() >= MaxAmmountOfMovies))
             {
                 listOfMovies = CreateMovieList();
+                listOfMovies = AddAmountsOfSeats(listOfMovies);
                 listOfMovies = AddMovieDuration(listOfMovies);
                 listOfMovies = AddQueueTimes(listOfMovies);
 
@@ -44,6 +45,16 @@ namespace BerrasCinema
                 durationToHours = int.Parse(s.MovieDuration.Hour.ToString());
                 queuTime += durationToHours * 60 + durationToMinutes;
                 queuTime += 30;
+            }
+            return listOfMovies;
+        }
+
+        private static List<Movies> AddAmountsOfSeats(List<Movies> listOfMovies)
+        {
+            int ammountOfSeat = 50;
+            foreach (var s in listOfMovies)
+            {
+                s.SeatsLeft = ammountOfSeat;
             }
             return listOfMovies;
         }

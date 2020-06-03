@@ -54,26 +54,42 @@ namespace BerrasCinema.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ConfirmEmail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MovieID")
                         .HasColumnType("int");
 
                     b.Property<string>("MovieName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("OrderID");
 
+                    b.HasIndex("MovieID");
+
                     b.ToTable("TicketOrders");
+                });
+
+            modelBuilder.Entity("BerrasCinema.Models.Order", b =>
+                {
+                    b.HasOne("BerrasCinema.Models.Movies", "Movies")
+                        .WithMany("Orders")
+                        .HasForeignKey("MovieID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

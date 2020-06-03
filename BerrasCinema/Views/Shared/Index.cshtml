@@ -49,9 +49,7 @@
                 @Html.DisplayFor(modelItem => item.ConfirmEmail)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.OrderID">Details</a>
             </td>
         </tr>
 }
